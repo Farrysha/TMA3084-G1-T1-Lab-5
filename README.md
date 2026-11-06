@@ -1,4 +1,4 @@
-# bottom_navigation_bar_lab
+# bottom navigation bar and home page
 
 lab 5
 
