@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Home page of the StudentHub app (TMA3084 Lab 5.1).
 ///
