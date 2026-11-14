@@ -33,7 +33,7 @@ class _Screen2State extends State<Screen2> {
   }
 
   // Filter students based on active tab programme category and search query
-  List _getFilteredStudents(String programme) {
+  List<Map<String, String>> _getFilteredStudents(String programme) {
     return _allStudents.where((student) {
       final matchesProgramme =
           programme == 'All' || student['programme'] == programme;
