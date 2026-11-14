@@ -1,10 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Profile / About page (TMA3084 Lab 5.1).
-///
-/// Kept as [Screen4] so the bottom navigation in main.dart can show this
-/// page as the About tab. The header is a [Stack]: the banner, logo, and
-/// title sit on top of each other.
 class Screen4 extends StatelessWidget {
   const Screen4({super.key});
 
