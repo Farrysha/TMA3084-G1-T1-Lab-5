@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'screen2_1.dart';
 
 class Screen2 extends StatefulWidget {
@@ -39,7 +40,7 @@ class _Screen2State extends State<Screen2> {
           programme == 'All' || student['programme'] == programme;
       final matchesSearch =
           student['name']!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-              student['id']!.contains(_searchQuery);
+          student['id']!.contains(_searchQuery);
       return matchesProgramme && matchesSearch;
     }).toList();
   }
@@ -80,14 +81,14 @@ class _Screen2State extends State<Screen2> {
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      setState(() {
-                        _searchController.clear();
-                        _searchQuery = '';
-                      });
-                    },
-                  )
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            setState(() {
+                              _searchController.clear();
+                              _searchQuery = '';
+                            });
+                          },
+                        )
                       : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
