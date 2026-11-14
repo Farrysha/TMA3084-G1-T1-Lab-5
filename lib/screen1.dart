@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Home page of the StudentHub app (TMA3084 Lab 5.1).
 ///
@@ -81,9 +81,8 @@ class Screen1 extends StatelessWidget {
       onNavigate!(tabIndex);
     } else {
       // Safety net if the callback was not supplied.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Open the ' + label + ' tab below')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Open the $label tab below')));
     }
   }
 

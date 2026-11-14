@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -32,7 +32,7 @@ class _Screen2State extends State<Screen2> {
   }
 
   // Filter students based on active tab programme category and search query
-  List _getFilteredStudents(String programme) {
+  List<Map<String, String>> _getFilteredStudents(String programme) {
     return _allStudents.where((student) {
       final matchesProgramme =
           programme == 'All' || student['programme'] == programme;
@@ -201,7 +201,7 @@ class _Screen2State extends State<Screen2> {
 
 // Minimal Student Details Page stub for navigation connection
 class StudentDetailPage extends StatelessWidget {
-  final Map student;
+  final Map<String, String> student;
 
   const StudentDetailPage({super.key, required this.student});
 
