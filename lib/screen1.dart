@@ -81,9 +81,8 @@ class Screen1 extends StatelessWidget {
       onNavigate!(tabIndex);
     } else {
       // Safety net if the callback was not supplied.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Open the ' + label + ' tab below')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Open the $label tab below')));
     }
   }
 
@@ -153,10 +152,10 @@ class Screen1 extends StatelessWidget {
   /// Loads a PNG, and falls back to a Material icon if the file is missing,
   /// so the app never crashes with a grey asset error during the demo.
   static Widget _assetImage(
-      String path, {
-        double? size,
-        required IconData fallback,
-      }) {
+    String path, {
+    double? size,
+    required IconData fallback,
+  }) {
     return Image.asset(
       path,
       width: size,
