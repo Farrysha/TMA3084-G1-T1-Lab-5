@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screen2_1.dart';
+
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
 
@@ -18,7 +20,7 @@ class _Screen2State extends State<Screen2> {
       'name': 'Siti Elisya',
       'programme': 'Software Engineering',
     },
-    {'id': '102142', 'name': 'John Doe', 'programme': 'Data Networking'},
+    {'id': '102142', 'name': 'Muhammad Amin', 'programme': 'Data Networking'},
     {'id': '104859', 'name': 'Sarah Lee', 'programme': 'Computer Science'},
     {'id': '101938', 'name': 'Jane Doe', 'programme': 'Software Engineering'},
     {'id': '105221', 'name': 'Kenny Emmet', 'programme': 'Data Networking'},
@@ -32,7 +34,7 @@ class _Screen2State extends State<Screen2> {
   }
 
   // Filter students based on active tab programme category and search query
-  List _getFilteredStudents(String programme) {
+  List<Map<String, String>> _getFilteredStudents(String programme) {
     return _allStudents.where((student) {
       final matchesProgramme =
           programme == 'All' || student['programme'] == programme;
@@ -171,20 +173,6 @@ class _Screen2State extends State<Screen2> {
                             ),
                           ),
                           isThreeLine: true,
-                          trailing: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.black26,
-                          ),
-                          onTap: () {
-                            // Navigation to Student Details page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    StudentDetailPage(student: student),
-                              ),
-                            );
-                          },
                         ),
                       );
                     },
@@ -193,30 +181,6 @@ class _Screen2State extends State<Screen2> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// Minimal Student Details Page stub for navigation connection
-class StudentDetailPage extends StatelessWidget {
-  final Map student;
-
-  const StudentDetailPage({super.key, required this.student});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${student['name']} Details'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Text(
-          'Student Details Page for ${student['name']}',
-          style: const TextStyle(fontSize: 18),
         ),
       ),
     );
