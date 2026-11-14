@@ -46,10 +46,7 @@ class _MyAppState extends State<MyApp> {
         ),
         // IndexedStack keeps each tab alive, so scroll position and any
         // sorting on the records table survive a tab switch.
-        body: IndexedStack(
-          index: _currentIndex,
-          children: tabs,
-        ),
+        body: IndexedStack(index: _currentIndex, children: tabs),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.blue,
@@ -60,10 +57,7 @@ class _MyAppState extends State<MyApp> {
           iconSize: 30.0,
           currentIndex: _currentIndex,
           items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
               icon: Icon(Icons.people_alt_rounded),
               label: 'View Students',
