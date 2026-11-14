@@ -18,7 +18,7 @@ class _Screen2State extends State<Screen2> {
       'name': 'Siti Elisya',
       'programme': 'Software Engineering',
     },
-    {'id': '102142', 'name': 'John Doe', 'programme': 'Data Networking'},
+    {'id': '102142', 'name': 'Muhammad Amin', 'programme': 'Data Networking'},
     {'id': '104859', 'name': 'Sarah Lee', 'programme': 'Computer Science'},
     {'id': '101938', 'name': 'Jane Doe', 'programme': 'Software Engineering'},
     {'id': '105221', 'name': 'Kenny Emmet', 'programme': 'Data Networking'},
