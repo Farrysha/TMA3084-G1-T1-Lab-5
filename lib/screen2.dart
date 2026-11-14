@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screen2_1.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -38,7 +39,7 @@ class _Screen2State extends State<Screen2> {
           programme == 'All' || student['programme'] == programme;
       final matchesSearch =
           student['name']!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          student['id']!.contains(_searchQuery);
+              student['id']!.contains(_searchQuery);
       return matchesProgramme && matchesSearch;
     }).toList();
   }
@@ -79,14 +80,14 @@ class _Screen2State extends State<Screen2> {
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            setState(() {
-                              _searchController.clear();
-                              _searchQuery = '';
-                            });
-                          },
-                        )
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        _searchController.clear();
+                        _searchQuery = '';
+                      });
+                    },
+                  )
                       : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
@@ -171,20 +172,6 @@ class _Screen2State extends State<Screen2> {
                             ),
                           ),
                           isThreeLine: true,
-                          trailing: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.black26,
-                          ),
-                          onTap: () {
-                            // Navigation to Student Details page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    StudentDetailPage(student: student),
-                              ),
-                            );
-                          },
                         ),
                       );
                     },
@@ -193,30 +180,6 @@ class _Screen2State extends State<Screen2> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// Minimal Student Details Page stub for navigation connection
-class StudentDetailPage extends StatelessWidget {
-  final Map student;
-
-  const StudentDetailPage({super.key, required this.student});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${student['name']} Details'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Text(
-          'Student Details Page for ${student['name']}',
-          style: const TextStyle(fontSize: 18),
         ),
       ),
     );
