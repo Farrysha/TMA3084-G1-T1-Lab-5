@@ -37,7 +37,11 @@ class StudentDetailPage extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             const SizedBox(height: 20),
-            _DetailTile(icon: Icons.school, title: 'Programme', value: programme),
+            _DetailTile(
+              icon: Icons.school,
+              title: 'Programme',
+              value: programme,
+            ),
             _DetailTile(
               icon: Icons.badge,
               title: 'Matric Number',
