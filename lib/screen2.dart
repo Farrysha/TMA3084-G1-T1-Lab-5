@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+
 import 'screen2_1.dart';
 
 class Screen2 extends StatefulWidget {
@@ -39,7 +40,7 @@ class _Screen2State extends State<Screen2> {
       final query = _searchController.text;
       final matchesSearch =
           student['name']!.toLowerCase().contains(query.toLowerCase()) ||
-              student['id']!.contains(query);
+          student['id']!.contains(query);
       return matchesProgramme && matchesSearch;
     }).toList();
   }
@@ -85,7 +86,10 @@ class _Screen2State extends State<Screen2> {
             indicatorWeight: 3.0,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
-            labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            labelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
             tabs: programmes.map((prog) => Tab(text: prog)).toList(),
           ),
         ),
@@ -99,17 +103,20 @@ class _Screen2State extends State<Screen2> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   labelText: 'Search by name or matric number',
-                  labelStyle: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                  labelStyle: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontSize: 14,
+                  ),
                   prefixIcon: Icon(Icons.search, color: Colors.blue.shade700),
                   suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
-                    icon: const Icon(Icons.clear, color: Colors.grey),
-                    onPressed: () {
-                      setState(() {
-                        _searchController.clear();
-                      });
-                    },
-                  )
+                          icon: const Icon(Icons.clear, color: Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _searchController.clear();
+                            });
+                          },
+                        )
                       : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -121,11 +128,17 @@ class _Screen2State extends State<Screen2> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.blue.shade700, width: 2),
+                    borderSide: BorderSide(
+                      color: Colors.blue.shade700,
+                      width: 2,
+                    ),
                   ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
                 ),
                 onChanged: (_) => setState(() {}),
               ),
@@ -141,11 +154,19 @@ class _Screen2State extends State<Screen2> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.search_off_rounded, size: 64, color: Colors.grey.shade400),
+                          Icon(
+                            Icons.search_off_rounded,
+                            size: 64,
+                            color: Colors.grey.shade400,
+                          ),
                           const SizedBox(height: 12),
                           Text(
                             'No students found.',
-                            style: TextStyle(fontSize: 16, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
@@ -193,7 +214,9 @@ class _Screen2State extends State<Screen2> {
                                 children: [
                                   // Profile Avatar
                                   CircleAvatar(
-                                    backgroundColor: badgeColor.withValues(alpha: 0.12),
+                                    backgroundColor: badgeColor.withValues(
+                                      alpha: 0.12,
+                                    ),
                                     radius: 26,
                                     child: Icon(
                                       Icons.person_rounded,
@@ -205,7 +228,8 @@ class _Screen2State extends State<Screen2> {
                                   // Student Details
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           student['name']!,
@@ -227,10 +251,17 @@ class _Screen2State extends State<Screen2> {
                                         const SizedBox(height: 8),
                                         // Programme Badge Tag
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 4,
+                                          ),
                                           decoration: BoxDecoration(
-                                            color: badgeColor.withValues(alpha: 0.08),
-                                            borderRadius: BorderRadius.circular(6),
+                                            color: badgeColor.withValues(
+                                              alpha: 0.08,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
                                           ),
                                           child: Text(
                                             progName ?? '',
