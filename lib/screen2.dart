@@ -173,6 +173,20 @@ class _Screen2State extends State<Screen2> {
                             ),
                           ),
                           isThreeLine: true,
+
+                          trailing: const Icon(
+                            Icons.chevron_right,
+                            color: Colors.black26,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    StudentDetailPage(student: student),
+                              ),
+                            );
+                          },
                         ),
                       );
                     },
