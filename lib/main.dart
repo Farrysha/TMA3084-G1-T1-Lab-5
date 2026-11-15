@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
 
-  /// Passed down to Screen1 so its menu cards can change tabs.
+  /// Passed down to Screen1 so its menu cards can change the tabs.
   void _goToTab(int index) {
     setState(() {
       _currentIndex = index;
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Built inside build() so Screen1 can receive the callback.
+    // Built inside build() so that Screen1 can receive the callback.
     final tabs = <Widget>[
       Screen1(onNavigate: _goToTab),
       const Screen2(),

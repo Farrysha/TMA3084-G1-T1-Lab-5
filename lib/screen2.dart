@@ -12,7 +12,7 @@ class Screen2 extends StatefulWidget {
 class _Screen2State extends State<Screen2> {
   final TextEditingController _searchController = TextEditingController();
 
-  // Student dataset
+  // Student datasets
   final _allStudents = [
     {
       'id': '103103',

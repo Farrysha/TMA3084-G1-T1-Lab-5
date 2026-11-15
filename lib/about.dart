@@ -91,7 +91,7 @@ class Screen4 extends StatelessWidget {
   }
 }
 
-/// Logo, app name, tagline, and version layered on the banner.
+///Logo, app name, tagline, and version layered on the banner.
 class _AppHeader extends StatelessWidget {
   const _AppHeader();
 
