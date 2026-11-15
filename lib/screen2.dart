@@ -11,7 +11,6 @@ class Screen2 extends StatefulWidget {
 
 class _Screen2State extends State<Screen2> {
   final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
 
   // Student dataset
   final _allStudents = [
@@ -38,9 +37,10 @@ class _Screen2State extends State<Screen2> {
     return _allStudents.where((student) {
       final matchesProgramme =
           programme == 'All' || student['programme'] == programme;
+      final query = _searchController.text;
       final matchesSearch =
-          student['name']!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          student['id']!.contains(_searchQuery);
+          student['name']!.toLowerCase().contains(query.toLowerCase()) ||
+          student['id']!.contains(query);
       return matchesProgramme && matchesSearch;
     }).toList();
   }
@@ -79,14 +79,11 @@ class _Screen2State extends State<Screen2> {
                 decoration: InputDecoration(
                   labelText: 'Search by name or matric number',
                   prefixIcon: const Icon(Icons.search),
-                  suffixIcon: _searchQuery.isNotEmpty
+                  suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
                           icon: const Icon(Icons.clear),
                           onPressed: () {
-                            setState(() {
-                              _searchController.clear();
-                              _searchQuery = '';
-                            });
+                            setState(_searchController.clear);
                           },
                         )
                       : null,
@@ -96,11 +93,7 @@ class _Screen2State extends State<Screen2> {
                   filled: true,
                   fillColor: Colors.grey[100],
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    _searchQuery = value;
-                  });
-                },
+                onChanged: (_) => setState(() {}),
               ),
             ),
             // TabBarView to display list views filtered by tabs
