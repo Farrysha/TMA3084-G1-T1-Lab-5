@@ -88,8 +88,53 @@ This log records AI assistance used while building the StudentHub home page and 
 
 ---
 
-# Screen 2
+# Amirul Asyraf bin Abdullah Yusup (103295) - SCREEN 2: STUDENT LIST & FILTERING
+## 1. Refactoring Student Detail Navigation to Match Team Boundaries — Claude
 
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "Add navigation to Student Details without building the entire details page (no pop-up dialog), and then remove the inline `Navigator.push` stub code since navigation is handled via `import 'screen2_1.dart';`."
+- **Generated Suggestions:**
+  - Initially suggested an `AlertDialog` pop-up, then provided a minimal `Navigator.push` stub (`StudentDetailPage`), and finally removed the inline navigation stub and `onTap` handler once `screen2_1.dart` was imported.
+- **Accepted Changes:**
+  - Removed the `AlertDialog` and inline `StudentDetailPage` stub from `screen2.dart` while keeping `import 'screen2_1.dart';`.
+- **Rejected Changes:**
+  - The `AlertDialog` pop-up and inline `StudentDetailPage` class were rejected because the student details screen is maintained separately in `screen2_1.dart`.
+- **Reasons for Decisions:**
+  - Keeps module boundaries clean between Screen 2 and Screen 2.1 for team integration.
+
+## 2. Cleaning Up Student Map Fields and ListTile Layout — Claude
+
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "Remove the unnecessary email field from the student dataset and `ListTile` subtitle in `screen2.dart` so only the profile icon, student name, matric number, and programme are displayed."
+- **Generated Suggestions:**
+  - Suggested removing the `'email'` key-value pairs from every map entry in `_allStudents`.
+  - Recommended simplifying the `ListTile` `subtitle` `Column` to render only `'Matric No: ${student['id']}'` and `'Programme: ${student['programme']}'`.
+- **Accepted Changes:**
+  - Removed all `'email'` fields from `_allStudents` and updated the `ListTile` subtitle layout accordingly.
+- **Rejected Changes:**
+  - None.
+- **Reasons for Decisions:**
+  - Keeps the list cards clean, readable, and aligned with the required data attributes for Screen 2.
+
+## 3. Refining UI Visuals and Modernizing Color Opacity in Screen 2 — Claude
+
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "improvised or refine my code to make it visually better"
+- **Generated Suggestions:**
+  - Suggested adding dynamic, color-coded programme badge tags and matching `CircleAvatar` icons for each academic category (Software Engineering, Data Networking, Computer Science).
+  - Recommended polishing the search bar with subtle background container styling, rounded borders, and an icon-backed empty state placeholder.
+  - Advised replacing deprecated `.withOpacity()` method calls with modern `.withValues(alpha:)` syntax to prevent precision loss warnings in current Flutter analyzers.
+- **Accepted Changes:**
+  - Added department-specific color styling and visible programme badge tags inside the student cards.
+  - Upgraded all opacity modifier calls to use `.withValues(alpha:)`.
+  - Implemented the polished search bar container and `Icons.search_off_rounded` empty state view.
+- **Rejected Changes:**
+  - None.
+- **Reasons for Decisions:**
+  - Elevates the visual polish and user experience of the student directory while maintaining a clean codebase free of deprecation warnings.
 ---
 
 # Muhammad Daniel (102730) - SCREEN 3: STUDENT RECORDS & SORTING
