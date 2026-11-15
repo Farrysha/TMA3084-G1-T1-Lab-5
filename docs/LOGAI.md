@@ -89,3 +89,65 @@ This log records AI assistance used while building the StudentHub home page and 
 ---
 
 # Screen 2
+
+---
+
+# Screen 3
+
+## 1. Evaluating the Sort Helper and the Map-Based Data — Claude
+
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "Evaluate my `_sort` function and the way I store the students as a list of maps? Is there any risk? Here is my screen3.dart: [full file pasted]"
+- **Generated Suggestions:**
+  - Confirmed that `a[key].compareTo(b[key])` works for every column because `String` and `double` both implement `compareTo`, and that negating the result is a valid way to reverse the order.
+  - Pointed out that the map is `Map<String, dynamic>`, so `a[key]` is checked at runtime, not compile time: a mistyped key such as `'programe'` would compile and then crash when a header is tapped.
+  - Suggested replacing the maps with a small `Student` class (`name`, `id`, `programme`, `cgpa` as typed final fields) so the compiler catches wrong keys and wrong types.
+  - Noted that Dart's `List.sort` is not guaranteed to be stable, so students with the same programme may swap places between sorts, and suggested an optional tie-break on `name`.
+  - Noted that `compareTo` on strings is case-sensitive; this is harmless here because every name starts with a capital letter, but it would matter if lowercase names were entered.
+- **Accepted Changes:**
+  - The evaluation of `_sort` was kept as writtens.
+- **Rejected Changes:**
+  - The `Student` class was rejected. All four keys are used only inside `Screen3`, and the six records carried over from Screen 2.
+  - The `name` tie-break was not added since it's uneccessary
+- **Reasons for Decisions:**
+  - Every key string appears in exactly one place per column (`'name'`, `'id'`, `'programme'`, `'cgpa'`), so the typo risk is trivial.
+  - The `Student` class is recorded as the first thing to do if the data later moves.
+ 
+## 2. Improving Structure and Comments (`_sort` vs `_onSort`) — Claude
+
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "Can you review how I organise the sorting code in `_Screen3State` and suggest improvements to readability? I want it easy to explain in my report."
+- **Generated Suggestions:**
+  - Keep `_sort` (the pure list ordering) separate from `_onSort` (the tap handler that calls `setState`), so `initState()` can call `_sort` directly without `setState`, which is unnecessary before the first build.
+  - Keep `_sortColumnIndex` and `_sortAscending` as the only sort state, since the `DataTable` needs exactly those two values to draw the arrow.
+  - Add short comments above `_sort`, `_onSort` and the `DataTable` sort arguments, describing what each does rather than restating the code.
+  - Leave a comment above the data list explaining that the first six records came from Screen 2, the next five are new, and the last two were added later.
+- **Accepted Changes:**
+  - The `_sort` / `_onSort` split, the two state fields, and the explanatory comments.
+- **Rejected Changes:**
+  - No suggestions were rejected.
+- **Reasons for Decisions:**
+  - Calling `_sort` from `initState` means the first frame is already sorted and the arrow on the Name column consistent with the row order.
+  - One handler that updates the state and re-sorts in a single `setState` stops the arrow and the rows from falling out of sync.
+  - Comments that explain intent make the code easier to defend in a code review than comments that just repeat the line below them.
+
+## 3. Keeping the Sort Order When Switching Tabs — Claude
+
+- **AI Tool:** Claude
+- **Prompt Used:**
+  > "If I sort the table by CGPA, go to the Home tab and come back, will the sort be lost? How do I make Screen3 remember it?"
+- **Generated Suggestions:**
+  - Explained that the sort order lives in `_Screen3State`, and a State object is only lost if the widget is removed from the tree and rebuilt.
+  - Checked `main.dart`: the tabs are shown through an `IndexedStack`, which keeps all four children mounted, so `_students`, `_sortColumnIndex` and `_sortAscending` already survive a tab switch with no code in `Screen3`.
+  - Described the alternatives that would be needed if the tabs were swapped with `body: tabs[_currentIndex]`: `AutomaticKeepAliveClientMixin` with `wantKeepAlive => true`, or saving the sort state in the parent.
+  - Warned that the sort state would still be lost when the app is fully closed, since nothing is persisted to storage.
+- **Accepted Changes:**
+  - No change to `screen3.dart`; the behaviour comes from the `IndexedStack` already added in `main.dart`.
+- **Rejected Changes:**
+  - `AutomaticKeepAliveClientMixin` and storing the sort in the parent were rejected as unnecessary.
+  - Persisting the sort order with local storage was rejected as outside the scope.
+- **Reasons for Decisions:**
+  - Adding keep-alive code to `Screen3` would duplicate what `IndexedStack` already does and would add a second mechanism for the same behaviour.
+  - Remembering the sort across app restarts is not part of the lab requirements, and the table opens sorted A–Z by name, which make sense.
