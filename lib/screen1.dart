@@ -81,9 +81,8 @@ class Screen1 extends StatelessWidget {
       onNavigate!(tabIndex);
     } else {
       // Safety net if the callback was not supplied.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Open the $label tab below')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Open the $label tab below')));
     }
   }
 
