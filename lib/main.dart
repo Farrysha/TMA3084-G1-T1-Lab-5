@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'screen1.dart';
 import 'screen2.dart';
@@ -6,12 +6,14 @@ import 'screen3.dart';
 import 'screen4.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -29,9 +31,9 @@ class _MyAppState extends State<MyApp> {
     // Built inside build() so Screen1 can receive the callback.
     final tabs = <Widget>[
       Screen1(onNavigate: _goToTab),
-      Screen2(),
-      Screen3(),
-      Screen4(),
+      const Screen2(),
+      const Screen3(),
+      const Screen4(),
     ];
 
     return MaterialApp(
