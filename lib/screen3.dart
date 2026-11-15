@@ -85,10 +85,10 @@ class _Screen3State extends State<Screen3> {
   @override
   void initState() {
     super.initState();
-    _sort('name', true); // start sorted by name A-Z
+    _sort('name', true); // Sorted name A-Z
   }
 
-  // Sort the list by the given key and direction.
+  // Sort the list by key and direction.
   void _sort(String key, bool ascending) {
     _students.sort((a, b) {
       final result = a[key].compareTo(b[key]);
@@ -96,7 +96,7 @@ class _Screen3State extends State<Screen3> {
     });
   }
 
-  // Called when a column header is tapped.
+  // Called when column header is tapped.
   void _onSort(int columnIndex, String key, bool ascending) {
     setState(() {
       _sortColumnIndex = columnIndex;
@@ -111,7 +111,7 @@ class _Screen3State extends State<Screen3> {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: DataTable(
-          // These two lines show the sorting arrow on the active column.
+          //Sorting arrow on the active column.
           sortColumnIndex: _sortColumnIndex,
           sortAscending: _sortAscending,
           headingRowColor: WidgetStateProperty.all(Colors.blue.shade50),
