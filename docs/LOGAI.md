@@ -92,8 +92,7 @@ This log records AI assistance used while building the StudentHub home page and 
 
 ---
 
-# Screen 3
-
+# Muhammad Daniel (102730) - SCREEN 3: STUDENT RECORDS & SORTING
 ## 1. Evaluating the Sort Helper and the Map-Based Data — Claude
 
 - **AI Tool:** Claude
