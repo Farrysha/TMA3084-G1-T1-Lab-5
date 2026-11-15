@@ -1,9 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 
+import 'about.dart';
 import 'screen1.dart';
 import 'screen2.dart';
 import 'screen3.dart';
-import 'screen4.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
-          title: Text(
+          title: const Text(
             'Student Hub',
             style: TextStyle(fontSize: 26, color: Colors.white),
           ),
@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
           unselectedFontSize: 14.0,
           iconSize: 30.0,
           currentIndex: _currentIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
               icon: Icon(Icons.people_alt_rounded),
