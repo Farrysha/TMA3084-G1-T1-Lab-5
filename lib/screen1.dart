@@ -1,7 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
 /// Home page of the StudentHub app (TMA3084 Lab 5.1).
-///
 /// Kept as a StatelessWidget named `Screen1`. It deliberately does NOT create
 /// its own Scaffold, so the parent's AppBar, Drawer and BottomNavigationBar
 /// keep working when this page is shown as the Home tab.

@@ -8,7 +8,7 @@ class Screen3 extends StatefulWidget {
 }
 
 class _Screen3State extends State<Screen3> {
-  // Student records: first 6 are from Screen 2 (with CGPA added), last 5 are new.
+  // First 6 are from Screen 2 (with CGPA added), last 5 are new.
   final List<Map<String, dynamic>> _students = [
     {
       'name': 'Siti Elisya',

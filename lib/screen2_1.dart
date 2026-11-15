@@ -69,6 +69,7 @@ class StudentDetailPage extends StatelessWidget {
   }
 }
 
+//stateless widget
 class _DetailTile extends StatelessWidget {
   const _DetailTile({
     required this.icon,
