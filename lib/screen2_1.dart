@@ -36,23 +36,18 @@ class StudentDetailPage extends StatelessWidget {
               name,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
-            Text(matricNo, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 20),
-            ListTile(
-              leading: const Icon(Icons.school),
-              title: const Text('Programme'),
-              subtitle: Text(programme),
+            _DetailTile(
+              icon: Icons.school,
+              title: 'Programme',
+              value: programme,
             ),
-            ListTile(
-              leading: const Icon(Icons.badge),
-              title: const Text('Matric Number'),
-              subtitle: SelectableText(matricNo),
+            _DetailTile(
+              icon: Icons.badge,
+              title: 'Matric Number',
+              value: matricNo,
             ),
-            ListTile(
-              leading: const Icon(Icons.email),
-              title: const Text('Email'),
-              subtitle: SelectableText(email),
-            ),
+            _DetailTile(icon: Icons.email, title: 'Email', value: email),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               icon: const Icon(Icons.copy),
@@ -70,6 +65,27 @@ class StudentDetailPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _DetailTile extends StatelessWidget {
+  const _DetailTile({
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(title),
+      subtitle: SelectableText(value),
     );
   }
 }
