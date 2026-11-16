@@ -1,10 +1,10 @@
 # AI Usage Log
 
 **Project:** StudentHub — TMA3084 Software Engineering Laboratory, Lab Exercise 5.1
-**Component:** Home page (`Screen1`), navigation host (`main.dart`), image assets
+**Component:** Home page (`Screen1`), student list (`Screen2`), student records (`Screen3`), About page (`about.dart`), navigation host (`main.dart`), image assets, GitHub Actions CI
 **Date:** 15 November 2026
 
-This log records AI assistance used while building the StudentHub home page and its supporting navigation and assets. Each entry states the prompt given, what the tool proposed, and which suggestions were accepted or rejected, with reasons.
+This log records AI assistance used while building StudentHub. Each entry states the prompt given, what the tool proposed, and which suggestions were accepted or rejected, with reasons.
 
 ---
 # Farrysha (107018) - HOME PAGE & BOTTOM DRAWER NAVIGATION
@@ -195,3 +195,56 @@ This log records AI assistance used while building the StudentHub home page and 
 - **Reasons for Decisions:**
   - Adding keep-alive code to `Screen3` would duplicate what `IndexedStack` already does and would add a second mechanism for the same behaviour.
   - Remembering the sort across app restarts is not part of the lab requirements, and the table opens sorted A–Z by name, which make sense.
+
+---
+
+# Darrel Deo Jaip (106946) - SCREEN 4: ABOUT PAGE & CI
+
+## 1. Matching the About Page Specification — ChatGPT
+- **AI Tool:** ChatGPT
+
+- **Prompt Used:**
+  > "Adjust accordingly." (with the about.dart attached)
+
+- **Generated Suggestions:**
+  - Restructured `about.dart` according to the required document sections: a header containing the logo, StudentHub title, tagline ("Your Student Information, Simplified."), and Version 1.0.0; an About StudentHub description; a Key Features section with icons; Development Information (Group G1-T1, Software Engineering Laboratory, UNIMAS, Flutter, and Dart); and a footer displaying the application version, copyright notice, and "Made with ❤️ using Flutter".
+  - Retained the layered `Stack` header required by the lab specification and extracted `_AppHeader`, `_SectionCard`, `_FeatureTile`, `_InfoRow`, and `_Footer` into separate reusable private widgets.
+  - Added an `errorBuilder` to the logo's `Image.asset` implementation to display a fallback school icon if the image asset cannot be loaded.
+  - Updated `widget_test.dart` to ensure that its text expectations matched the revised About Page content.
+
+- **Accepted Changes:**
+  - Adopted the revised section layout, reusable private widgets, logo fallback mechanism, and updated widget test.
+
+- **Rejected Changes:**
+  - None
+
+- **Reasons for Decisions:**
+  - The widget test relies on matching specific text strings. Therefore, retaining outdated text expectations, such as "About this application" and the previous matriculation checks, could cause the automated tests to fail after the page content was revised.
+  - Separating the page into smaller reusable widgets improves code readability and maintainability. It also allows individual sections to be modified without unnecessarily changing the entire page.
+  - Retaining the layered `Stack` header ensures compliance with the lab's design requirements while preserving the intended visual appearance.
+
+  ## 2. Building the About Page and CI Workflow – ChatGPT
+
+- **AI Tool:** ChatGPT
+
+- **Prompt Used:**
+  > "My task is About Page and CI, help." (with the Lab 5 instruction document attached)
+
+- **Generated Suggestions:**
+  - Replaced the placeholder About screen with `Screen4` in `lib/about.dart`, using a `Stack` layout to position the banner, logo, and title together.
+  - Developed the initial page content, including an application description and a list of key features.
+  - Created `.github/workflows/ci.yml` based on the lab's sample workflow. It automatically runs `dart format --output=none --set-exit-if-changed .`, `flutter analyze`, and `flutter test` whenever code is pushed or a pull request is created.
+  - Replaced the original counter widget test with a test that launches the application and checks the About tab.
+  - Resolved analyzer issues that could cause the CI workflow to fail, including a string issue on the Home page and a missing `const` constructor on the placeholder student-list page.
+
+- **Accepted Changes:**
+  - Implemented the `Stack`-based header, CI workflow, replacement widget test, and necessary analyzer fixes.
+
+- **Rejected Changes:**
+  - None.
+
+- **Reasons for Decisions:**
+  - The assigned task involved developing the About Page and implementing CI, while the existing branch still contained a placeholder screen displaying only "About" and did not have a CI workflow file.
+  - The original counter widget test was intended for the default Flutter demo application and did not reflect the actual StudentHub application. Therefore, it needed to be replaced with a test relevant to the implemented application.
+  - Formatting and static analysis checks apply to the entire project. Any formatting or analysis failure could cause the CI workflow to fail, so the identified issues needed to be resolved before the changes could pass the automated checks.
+
