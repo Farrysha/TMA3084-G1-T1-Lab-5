@@ -136,7 +136,46 @@ This log records AI assistance used while building the StudentHub home page and 
 - **Reasons for Decisions:**
   - Elevates the visual polish and user experience of the student directory while maintaining a clean codebase free of deprecation warnings.
 ---
+# Ellyanaironie (106980) - SCREEN 2_1: STUDENT DETAILS
+## 1. Matching Student List - Claude
 
+- **AI Tools:** Claude
+- **Prompt Used:**
+  > "Can you help me so that student list page can open the student detail? The is the code for student list screen : [full file pasted]"
+- **Generated Suggestions:**
+   - Explained that student list screen stores each student as a `Map` with the keys `name`, `id` and `programme`, and already calls `StudentDetailPage(student: student)`.
+   - The page was changed to take `final Map student` and to use the same class name, so their `onTap` works unchanged.
+   - Null-safe reads such as `student['name']?.toString() ?? 'Unknown'`, so a missing key shows "-" instead of crashing.
+   - Because there is no `email` key in their data, the email is generated from the matric number when it is missing.
+- **Accepted Changes:**
+   - Taking `Map student`, keeping the class name `StudentDetailPage`, the null-safe reads and the generated email fallback.
+- **Rejected Changes:**
+   - Passing name, matric number, programme and email as four separate constructor parameters: it would not match student list screen's existing call.
+   - Hardcoded default values inside the page: it would show the same student every time, and the lab requires the details to change for the selected student.
+- **Reasons for Decisions:**
+   - Matching the existing call means no change is needed in student list screen's code.
+   - A `Map` read with `?? '-'` cannot throw on a missing key, which covers the null safety point in the lab.
+   - The generated email is a placeholder, not stored data. This is stated here so it is not mistaken for real student data.
+
+## 2. Connecting Student List to Student Details - Claude
+
+- **AI Tools:** Claude
+- **Prompt Used:**
+  > "How can i make sure so that my student details page is not missing?"
+- **Generated Suggestions:**
+  - Screen 2's list already navigates with `StudentDetailPage(student: student)`, not need to write the navigation again.
+  - Two small changes were needed in Member 2's file: delete their placeholder `StudentDetailPage` class at the bottom, and add `import 'screen2_1.dart';` at the top.
+  - The `ListTile` needed its `onTap` and `trailing` so the import is actually used.
+- **Accepted Changes:**
+  - Requesting Member 2 to remove their placeholder and add `import 'screen2_1.dart';`.
+- **Rejected Changes:**
+  - Editing `screen2.dart` myself inside my own PR: it is Member 2's file, and doing so would risk a merge conflict and mix our contributions.
+-**Reasons for Decisions:**
+  - My class name and `Map student` parameter match what Member 2 already calls, so only the import and the placeholder removal were needed on their side.
+  - Each file stays with its owner to avoid conflicts.
+  - After Member 2's change the list opens my page.
+
+---
 # Muhammad Daniel (102730) - SCREEN 3: STUDENT RECORDS & SORTING
 ## 1. Evaluating the Sort Helper and the Map-Based Data — Claude
 
