@@ -1,7 +1,7 @@
 # AI Usage Log
 
 **Project:** StudentHub — TMA3084 Software Engineering Laboratory, Lab Exercise 5.1
-**Component:** Home page (`Screen1`), student list (`Screen2`), student records (`Screen3`), About page (`about.dart`), navigation host (`main.dart`), image assets, GitHub Actions CI
+**Component:** Home page (`Screen1`), student list (`Screen2`), student details (`Screen2_1`),student records (`Screen3`), About page (`about.dart`), navigation host (`main.dart`), image assets, GitHub Actions CI
 **Date:** 15 November 2026
 
 This log records AI assistance used while building StudentHub. Each entry states the prompt given, what the tool proposed, and which suggestions were accepted or rejected, with reasons.
