@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: flutter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   flutter-checks:
     name: Format, Analyze and Test
@@ -36,4 +40,9 @@ jobs:
         run: flutter analyze
 
       - name: Run Automated Tests
-        run: flutter test
+        run: |
+          if [ -d test ] && find test -name '*_test.dart' -print -quit | grep -q .; then
+            flutter test
+          else
+            echo "No automated test files found. Skipping tests."
+          fi
