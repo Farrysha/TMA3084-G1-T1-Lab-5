@@ -1,16 +1,18 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
+//shows a student's details, received a Map from student list
 class StudentDetailPage extends StatelessWidget {
-  final Map student;
+  final Map<String, String> student;
 
   const StudentDetailPage({super.key, required this.student});
 
   @override
   Widget build(BuildContext context) {
-    final String name = student['name']?.toString() ?? 'Unknown';
+    final String name = student['name'] ?? 'Unknown';
     final String matricNo = student['id']?.toString() ?? '-';
     final String programme = student['programme']?.toString() ?? '-';
+    //placeholder email built from matric number
     final String email =
         student['email']?.toString() ??
         '${matricNo.toLowerCase()}@student.unimas.my';
@@ -54,7 +56,13 @@ class StudentDetailPage extends StatelessWidget {
               label: const Text('Copy Info'),
               onPressed: () async {
                 await Clipboard.setData(
-                  ClipboardData(text: '$name\n$matricNo\n$programme\n$email'),
+                  ClipboardData(
+                    text:
+                        'Name: $name\n'
+                        'Matric No: $matricNo\n'
+                        'Programme: $programme\n'
+                        'Email: $email',
+                  ),
                 );
                 if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +77,7 @@ class StudentDetailPage extends StatelessWidget {
   }
 }
 
-//stateless widget
+//a single row showing an icon, a title and a selectable value
 class _DetailTile extends StatelessWidget {
   const _DetailTile({
     required this.icon,
@@ -86,6 +94,7 @@ class _DetailTile extends StatelessWidget {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
+      //lets user select and copy the value
       subtitle: SelectableText(value),
     );
   }
