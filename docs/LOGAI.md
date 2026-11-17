@@ -1,5 +1,25 @@
 # AI Usage Log
 
+## Navigation State Refactor (17 November 2026)
+
+### ChatGPT Codex
+
+- **Prompt:** "Refactor the app navigation so the selected `currentIndex` lives in a separate Provider or Riverpod state-management class. Review null safety, rebuild scope, naming, unused imports, and structure; improve the implementation and verify it with Flutter analysis and automated tests."
+- **Generated suggestions / implementation:** Added a `NavigationProvider` (`ChangeNotifier`) with a non-nullable index, range validation, and no notification when the selected index is unchanged. Wrapped the app in `ChangeNotifierProvider`, made `MyApp` stateless, and used separate `Selector<NavigationProvider, int>` widgets for the tab body and bottom navigation bar. Home quick-access cards update the provider through `context.read`.
+- **Review and accepted changes:** Accepted after review. `context.read` does not subscribe the home screen to state updates; `Selector` narrows rebuilds to the two widgets that display the selected tab. The `IndexedStack` remains in place to preserve tab state. Used descriptive `NavigationProvider`, `_StudentHubPage`, and `currentIndex` names.
+- **Corrections made:** Replaced the old optional callback with direct provider actions; removed its nullable fallback and unused label argument. Added a widget test for home quick-access navigation. No unused imports or analyzer issues remained.
+- **Test review correction:** The first quick-access test tap targeted a card below the test viewport and failed. Updated the test to scroll the card into view before tapping; the final run passed.
+- **Verification:** `flutter analyze` reported no issues. `flutter test` passed all tests.
+- **Rejected suggestions:** None recorded for this implementation.
+
+### Claude comparison attempt
+
+- **Prompt prepared:** Same refactoring prompt as above, with `lib/main.dart`, `lib/screen1.dart`, and `pubspec.yaml` as context.
+- **Result:** Claude could not be reached through the tools available in this session, so no prompt was submitted and no code was generated or evaluated. No Claude changes were accepted or rejected. This is an access limitation, not a quality judgment.
+- **Follow-up needed:** Run the same prompt with Claude, capture its output, review it, and update [AI_COMPARISON.md](AI_COMPARISON.md) with its actual analyzer/test results and any corrections.
+
+---
+
 **Project:** StudentHub — TMA3084 Software Engineering Laboratory, Lab Exercise 5.1
 **Component:** Home page (`Screen1`), student list (`Screen2`), student details (`Screen2_1`),student records (`Screen3`), About page (`about.dart`), navigation host (`main.dart`), image assets, GitHub Actions CI
 **Date:** 15 November 2026

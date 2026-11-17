@@ -1,16 +1,14 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:provider/provider.dart';
+
+import 'navigation_provider.dart';
 
 /// Home page of the StudentHub app (TMA3084 Lab 5.1).
 /// Kept as a StatelessWidget named `Screen1`. It deliberately does NOT create
 /// its own Scaffold, so the parent's AppBar, Drawer and BottomNavigationBar
 /// keep working when this page is shown as the Home tab.
 class Screen1 extends StatelessWidget {
-  const Screen1({super.key, this.onNavigate});
-
-  /// Called with the tab index the user wants to open. main.dart passes a
-  /// function that updates _currentIndex, so the BottomNavigationBar stays
-  /// on screen instead of being covered by a pushed route.
-  final ValueChanged<int>? onNavigate;
+  const Screen1({super.key});
 
   // ---- Brand colours -------------------------------------------------------
   static const Color _primary = Color(0xFF1E5BE0);
@@ -48,21 +46,21 @@ class Screen1 extends StatelessWidget {
                 icon: Icons.people_alt_rounded,
                 title: 'View Students',
                 subtitle: 'Browse the full student list',
-                onTap: () => _go(context, 1, 'View Students'),
+                onTap: () => _go(context, 1),
               ),
               const SizedBox(height: 12),
               _MenuCard(
                 icon: Icons.table_chart_rounded,
                 title: 'Student Records',
                 subtitle: 'Sortable table of names and CGPA',
-                onTap: () => _go(context, 2, 'Student Records'),
+                onTap: () => _go(context, 2),
               ),
               const SizedBox(height: 12),
               _MenuCard(
                 icon: Icons.info_rounded,
                 title: 'About',
                 subtitle: 'App information and credits',
-                onTap: () => _go(context, 3, 'About'),
+                onTap: () => _go(context, 3),
               ),
             ],
           ),
@@ -74,15 +72,9 @@ class Screen1 extends StatelessWidget {
   // ---- Navigation ----------------------------------------------------------
 
   /// Switches the host's bottom-navigation tab. Because this only changes the
-  /// index inside main.dart, the AppBar and BottomNavigationBar stay visible.
-  void _go(BuildContext context, int tabIndex, String label) {
-    if (onNavigate != null) {
-      onNavigate!(tabIndex);
-    } else {
-      // Safety net if the callback was not supplied.
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Open the $label tab below')));
-    }
+  /// provider's selected index, the AppBar and BottomNavigationBar stay visible.
+  void _go(BuildContext context, int tabIndex) {
+    context.read<NavigationProvider>().selectTab(tabIndex);
   }
 
   // ---- Sections ------------------------------------------------------------

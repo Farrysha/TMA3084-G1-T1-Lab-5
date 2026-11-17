@@ -4,6 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:bottom_navigation_bar_lab/main.dart';
 
 void main() {
+  testWidgets('Home quick access changes the selected navigation tab', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+
+    final quickAccessAbout = find.text('About').first;
+    await tester.ensureVisible(quickAccessAbout);
+    await tester.tap(quickAccessAbout);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your Student Information, Simplified.'), findsOneWidget);
+    expect(find.byType(BottomNavigationBar), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('About tab shows course and developer information', (
     WidgetTester tester,
   ) async {

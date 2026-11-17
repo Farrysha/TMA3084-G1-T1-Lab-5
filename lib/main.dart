@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:provider/provider.dart';
 
 import 'about.dart';
+import 'navigation_provider.dart';
 import 'screen1.dart';
 import 'screen2.dart';
 import 'screen3.dart';
@@ -9,47 +11,50 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => NavigationProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const _StudentHubPage(),
+      ),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  int _currentIndex = 0;
+class _StudentHubPage extends StatelessWidget {
+  const _StudentHubPage();
 
-  /// Passed down to Screen1 so its menu cards can change the tabs.
-  void _goToTab(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+  static const List<Widget> _tabs = [
+    Screen1(),
+    Screen2(),
+    Screen3(),
+    Screen4(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // Built inside build() so that Screen1 can receive the callback.
-    final tabs = <Widget>[
-      Screen1(onNavigate: _goToTab),
-      const Screen2(),
-      const Screen3(),
-      const Screen4(),
-    ];
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: const Text(
-            'Student Hub',
-            style: TextStyle(fontSize: 26, color: Colors.white),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text(
+          'Student Hub',
+          style: TextStyle(fontSize: 26, color: Colors.white),
         ),
-        // IndexedStack keeps each tab alive, so scroll position and any
-        // sorting on the records table survive a tab switch.
-        body: IndexedStack(index: _currentIndex, children: tabs),
-        bottomNavigationBar: BottomNavigationBar(
+      ),
+      // Only the changing body and navigation bar subscribe to the index.
+      body: Selector<NavigationProvider, int>(
+        selector: (_, navigation) => navigation.currentIndex,
+        builder: (_, currentIndex, _) =>
+            IndexedStack(index: currentIndex, children: _tabs),
+      ),
+      bottomNavigationBar: Selector<NavigationProvider, int>(
+        selector: (_, navigation) => navigation.currentIndex,
+        builder: (_, currentIndex, _) => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.blue,
           selectedItemColor: Colors.white,
@@ -57,7 +62,7 @@ class _MyAppState extends State<MyApp> {
           selectedFontSize: 19.0,
           unselectedFontSize: 14.0,
           iconSize: 30.0,
-          currentIndex: _currentIndex,
+          currentIndex: currentIndex,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
@@ -73,7 +78,7 @@ class _MyAppState extends State<MyApp> {
               label: 'About',
             ),
           ],
-          onTap: _goToTab,
+          onTap: context.read<NavigationProvider>().selectTab,
         ),
       ),
     );
