@@ -239,8 +239,8 @@ This log records AI assistance used while building StudentHub. Each entry states
 
 # Darrel Deo Jaip (106946) - SCREEN 4: ABOUT PAGE & CI
 
-## 1. Matching the About Page Specification — ChatGPT
-- **AI Tool:** ChatGPT
+## 1. Matching the About Page Specification — ChatGPT Codex
+- **AI Tool:** ChatGPT Codex
 
 - **Prompt Used:**
   > "Adjust accordingly." (with the about.dart attached)
@@ -262,9 +262,9 @@ This log records AI assistance used while building StudentHub. Each entry states
   - Separating the page into smaller reusable widgets improves code readability and maintainability. It also allows individual sections to be modified without unnecessarily changing the entire page.
   - Retaining the layered `Stack` header ensures compliance with the lab's design requirements while preserving the intended visual appearance.
 
-  ## 2. Building the About Page and CI Workflow – ChatGPT
+  ## 2. Building the About Page and CI Workflow – ChatGPT Codex
 
-- **AI Tool:** ChatGPT
+- **AI Tool:** ChatGPT Codex
 
 - **Prompt Used:**
   > "My task is About Page and CI, help." (with the Lab 5 instruction document attached)
@@ -287,3 +287,13 @@ This log records AI assistance used while building StudentHub. Each entry states
   - The original counter widget test was intended for the default Flutter demo application and did not reflect the actual StudentHub application. Therefore, it needed to be replaced with a test relevant to the implemented application.
   - Formatting and static analysis checks apply to the entire project. Any formatting or analysis failure could cause the CI workflow to fail, so the identified issues needed to be resolved before the changes could pass the automated checks.
 
+## 3. Refactoring – ChatGPT Codex
+**AI Tool:** ChatGPT Codex
+
+- **Prompt:** "Refactor the app navigation so the selected `currentIndex` lives in a separate Provider or Riverpod state-management class. Review null safety, rebuild scope, naming, unused imports, and structure; improve the implementation and verify it with Flutter analysis and automated tests."
+- **Generated suggestions / implementation:** Added a `NavigationProvider` (`ChangeNotifier`) with a non-nullable index, range validation, and no notification when the selected index is unchanged. Wrapped the app in `ChangeNotifierProvider`, made `MyApp` stateless, and used separate `Selector<NavigationProvider, int>` widgets for the tab body and bottom navigation bar. Home quick-access cards update the provider through `context.read`.
+- **Review and accepted changes:** Accepted after review. `context.read` does not subscribe the home screen to state updates; `Selector` narrows rebuilds to the two widgets that display the selected tab. The `IndexedStack` remains in place to preserve tab state. Used descriptive `NavigationProvider`, `_StudentHubPage`, and `currentIndex` names.
+- **Corrections made:** Replaced the old optional callback with direct provider actions; removed its nullable fallback and unused label argument. Added a widget test for home quick-access navigation. No unused imports or analyzer issues remained.
+- **Test review correction:** The first quick-access test tap targeted a card below the test viewport and failed. Updated the test to scroll the card into view before tapping; the final run passed.
+- **Verification:** `flutter analyze` reported no issues. `flutter test` passed all tests.
+- **Rejected suggestions:** None recorded for this implementation.
